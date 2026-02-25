@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrusel con Anuncios</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            display: flex;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .sidebar {
+            width: 30%;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #111;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .sidebar .match {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+
+        .sidebar .match h2 {
+            margin: 0 0 5px 0;
+            font-size: 18px;
+            color: #FFD700;
+        }
+
+        .sidebar .match p {
+            margin: 2px 0;
+            font-size: 14px;
+            color: #DDD;
+        }
+
+        .sidebar .title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #FFD700;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700;
+}
+
+.animated-title {
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700;
+        color: #FFD700;
+    }
+    50% {
+        text-shadow: 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700;
+        color: #FFF200;
+    }
+    100% {
+        text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700;
+        color: #FFD700;
+    }
+}
+
+        .carousel-container {
+            width: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="title animated-title">
+        Siguientes duelos
+    </div>
+    <div class="match">
+        <h2>Guille "The Goat" vs Maravilla Tomares</h2>
+        <p>Play off por el título de liga</p>
+        <p>El 25 de Febrero, en la pista central de Apipana. A la hora de comer, veremos quien gana finalmente la primera liga.</p>
+    </div>
+    <div class="match">
+        <h2>Tomate Valensuela vs Big Mountain</h2>
+        <p>Play off por mantener la categoría</p>
+        <p>El 25 de Febrero, en la pista central de Apipana. Como aperitivo posterior a la resolución de la liga, por favor mantengan el orden y no lleguen a las manos que, es sólo un juego.</p>
+    </div>
+    <div class="match">
+        <h2>Mensaje de los patrocinadores</h2>
+        <p>Menu hoy de categoria en la Cafetería Ciudad Expo</p>
+        <p>Lentejas con verduras, Lasaña, postre y bebida por 10€, opciones veganas disponibles. Pago con Cobee disponible.</p>
+    </div>
+</div>
+
+<div class="carousel-container">
+    <div class="carousel">
+        <img id="imagen" src="">
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const folders = {
+            "1-division": [
+                "001.png",
+                "tomares.png",
+                "goat.png",
+                "clockwork.png",
+                "gonsales.jpg",
+                "biker.png",
+                "arjonilla.png"
+            ],
+            "2-division": [
+                "002.png",
+                "utrilla.png",
+                "jesusm.png",
+                "tomate.png",
+                "fakemoon.jpg",
+                "realmoon.png",
+                "machinegun.png",
+                "icarus.png"
+            ],
+            "3-division": [
+                "003.png",
+                "barrero.png",
+                "flora.png",
+                "maria.png",
+                "richie.png",
+                "hellraiser.png",
+                "guiri.png",
+                "ruben.png",
+                "flo.png"
+            ],
+            "4-copa": [
+                "004.png",
+                "tomares.png",
+                "goat.png",
+                "clockwork.png",
+                "gonsales.jpg",
+                "biker.png",
+                "arjonilla.png",
+                "utrilla.png",
+                "jesusm.png",
+                "tomate.png",
+                "fakemoon.jpg",
+                "realmoon.png",
+                "machinegun.png",
+                "icarus.png",
+                "barrero.png",
+                "flora.png",
+                "maria.png",
+                "richie.png",
+                "hellraiser.png",
+                "guiri.png",
+                "ruben.png",
+                "flo.png"
+            ]
+        };
+
+        let images = [];
+
+        for (const folder in folders) {
+            folders[folder].forEach(file => {
+                images.push(`images/${folder}/${file}`);
+            });
+        }
+
+        const img = document.getElementById("imagen");
+        let index = 0;
+
+        function mostrarImagen() {
+            if (!img || !images.length) return;
+
+            img.style.opacity = 0;
+
+            setTimeout(() => {
+                img.src = images[index];
+                img.onload = () => img.style.opacity = 1;
+
+                img.onerror = () => {
+                    index = (index + 1) % images.length;
+                    mostrarImagen();
+                };
+
+                index = (index + 1) % images.length;
+            }, 500);
+        }
+
+        mostrarImagen();
+        setInterval(mostrarImagen, 5000);
+    });
+</script>
+</body>
+</html>
