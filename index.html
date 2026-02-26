@@ -2,125 +2,164 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Carrusel con Anuncios</title>
+    <title>Carrusel Liga</title>
+
     <style>
-        body, html {
+        html, body {
             margin: 0;
             padding: 0;
-            width: 100%;
             height: 100%;
-            background-color: black;
-            display: flex;
-            overflow: hidden;
+            background: black;
             font-family: Arial, sans-serif;
             color: white;
         }
 
+        .container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
         .sidebar {
-            width: 30%;
-            padding: 20px;
+            width: 25%;
+            background: #111;
+            padding: 25px;
             box-sizing: border-box;
-            background-color: #111;
             display: flex;
             flex-direction: column;
-            justify-content: center;
         }
 
-        .sidebar .match {
-            margin-bottom: 20px;
-            border-bottom: 1px solid #444;
-            padding-bottom: 10px;
+        .sidebar-right {
+            width: 25%;
+            background: #111;
+            padding: 25px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
         }
 
-        .sidebar .match h2 {
-            margin: 0 0 5px 0;
-            font-size: 18px;
+        .title {
+            font-size: 34px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
             color: #FFD700;
         }
 
-        .sidebar .match p {
-            margin: 2px 0;
+        .animated-title {
+            animation: glow 1.5s infinite alternate;
+        }
+
+        .match {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .match h2 {
+            font-size: 18px;
+            margin: 0 0 8px 0;
+            color: #FFD700;
+        }
+
+        .match p {
             font-size: 14px;
+            margin: 4px 0;
             color: #DDD;
         }
 
-        .sidebar .title {
-    font-size: 32px;
-    font-weight: bold;
-    color: #FFD700;
-    margin-bottom: 20px;
-    text-align: center;
-    text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700;
-}
-
-.animated-title {
-    animation: glow 1.5s infinite alternate;
-}
-
-@keyframes glow {
-    0% {
-        text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700;
-        color: #FFD700;
-    }
-    50% {
-        text-shadow: 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700;
-        color: #FFF200;
-    }
-    100% {
-        text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700;
-        color: #FFD700;
-    }
-}
-
-        .carousel-container {
-            width: 70%;
+        .carousel-center {
+            width: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: black;
         }
 
-        .carousel img {
-            max-width: 90%;
-            max-height: 90%;
+        .carousel-center img {
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
             transition: opacity 1s ease-in-out;
             opacity: 0;
-            border-radius: 5px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        .sidebar-right a {
+            display: block;
+            margin: 12px 0;
+            text-decoration: none;
+            color: white;
+            background: #222;
+            padding: 14px;
+            border-radius: 6px;
+            text-align: center;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .sidebar-right a:hover {
+            background: #444;
+            transform: scale(1.05);
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #FFD700, 0 0 15px #FFD700;
+            }
+            to {
+                text-shadow: 0 0 25px #FFD700, 0 0 45px #FFD700;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<div class="sidebar">
-    <div class="title animated-title">
-        Siguientes duelos
-    </div>
-    <div class="match">
-        <h2>Guille "The Goat" vs Maravilla Tomares</h2>
-        <p>Play off por el título de liga</p>
-        <p>El 25 de Febrero, en la pista central de Apipana. A la hora de comer, veremos quien gana finalmente la primera liga.</p>
-    </div>
-    <div class="match">
-        <h2>Tomate Valensuela vs Big Mountain</h2>
-        <p>Play off por mantener la categoría</p>
-        <p>El 25 de Febrero, en la pista central de Apipana. Como aperitivo posterior a la resolución de la liga, por favor mantengan el orden y no lleguen a las manos que, es sólo un juego.</p>
-    </div>
-    <div class="match">
-        <h2>Mensaje de los patrocinadores</h2>
-        <p>Menu hoy de categoria en la Cafetería Ciudad Expo</p>
-        <p>Lentejas con verduras, Lasaña, postre y bebida por 10€, opciones veganas disponibles. Pago con Cobee disponible.</p>
-    </div>
-</div>
+<div class="container">
 
-<div class="carousel-container">
-    <div class="carousel">
+    <div class="sidebar">
+        <div class="title animated-title">
+            Siguientes duelos
+        </div>
+
+        <div class="match">
+            <h2>Guille "The Goat" vs Maravilla Tomares</h2>
+            <p>Play off por el título de liga</p>
+            <p>El 25 de Febrero, en la pista central de Apipana. A la hora de comer, veremos quien gana finalmente la primera liga.</p>
+        </div>
+
+        <div class="match">
+            <h2>Tomate Valensuela vs Big Mountain</h2>
+            <p>Play off por mantener la categoría</p>
+            <p>El 25 de Febrero, en la pista central de Apipana. Como aperitivo posterior a la resolución de la liga, por favor mantengan el orden y no lleguen a las manos que, es sólo un juego.</p>
+        </div>
+
+        <div class="match">
+            <h2>Mensaje de los patrocinadores</h2>
+            <p>Menu hoy de categoria en la Cafetería Ciudad Expo</p>
+            <p>Lentejas con verduras, Lasaña, postre y bebida por 10€, opciones veganas disponibles. Pago con Cobee disponible.</p>
+        </div>
+    </div>
+
+    <div class="carousel-center">
         <img id="imagen" src="">
     </div>
+
+    <div class="sidebar-right">
+        <div class="title animated-title">
+            Seguir competiciones
+        </div>
+
+        <a href="https://challonge.com/v55jrudk" target="_blank">Primera División</a>
+        <a href="https://challonge.com/s4skubaj" target="_blank">Segunda División</a>
+        <a href="https://challonge.com/2ag08fio" target="_blank">Tercera División</a>
+        <a href="https://challonge.com/o6f3z1f4" target="_blank">Copa</a>
+    </div>
+
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+
         const folders = {
             "1-division": [
                 "001.png",
@@ -197,12 +236,6 @@
             setTimeout(() => {
                 img.src = images[index];
                 img.onload = () => img.style.opacity = 1;
-
-                img.onerror = () => {
-                    index = (index + 1) % images.length;
-                    mostrarImagen();
-                };
-
                 index = (index + 1) % images.length;
             }, 500);
         }
@@ -211,5 +244,6 @@
         setInterval(mostrarImagen, 5000);
     });
 </script>
+
 </body>
 </html>
